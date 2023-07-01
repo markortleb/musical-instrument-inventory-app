@@ -1,7 +1,7 @@
-import express, {Router} from "express";
+import * as express from 'express';
 
-const router: Router = express.Router();
-const urlencodedParser: any =  express.urlencoded({ extended: false });
+const router: express.Router = express.Router();
+// const urlencodedParser: any =  express.urlencoded({ extended: false });
 
 router.get('/', function(req, res, next) {
     res.render(

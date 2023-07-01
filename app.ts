@@ -1,9 +1,9 @@
-import path from 'path';
-import express, { Express } from 'express';
-import indexRouter from './routes/index';
+import * as path from 'path';
+import * as express from "express";
+// import indexRouter from './routes/index';
 
 
-const app: Express = express();
+const app: express.Express = express();
 
 
 app.set('views', path.join(__dirname, 'views'));
@@ -11,7 +11,7 @@ app.set('view engine', 'ejs');
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
+// app.use('/', indexRouter);
 
 
-module.exports = app;
+export = app;
