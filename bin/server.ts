@@ -1,4 +1,4 @@
-import * as app from '../app';
+import {app} from '../app.js';
 const host: string = 'localhost';
 const port: number = 8000;
 

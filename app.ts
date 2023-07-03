@@ -1,8 +1,12 @@
-import * as path from 'path';
-import * as fs from 'fs';
-import * as express from "express";
-import * as indexRouter from './routes/index';
+import path from 'path';
+import fs from 'fs';
+import { fileURLToPath } from 'url';
+import express from 'express';
+import mongoose from 'mongoose';
+import {router as indexRouter} from './routes/index.js';
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 function getMongoConnString(): string {
     interface ConnInfo {
@@ -15,7 +19,20 @@ function getMongoConnString(): string {
         fs.readFileSync(path.join(__dirname, '../db_conn_info/db_conn_info.json'), 'utf-8')
     );
 
-    return `mongodb+srv://${dbConnInfo.username}:${dbConnInfo.password}@${dbConnInfo.hostname}`;
+    return `mongodb+srv://${dbConnInfo.username}:${dbConnInfo.password}@${dbConnInfo.hostname}/?retryWrites=true&w=majority`;
+}
+
+
+async function setupDatabaseConn(): Promise<boolean> {
+    const connString =getMongoConnString();
+
+    mongoose.set('strictQuery', false);
+    main().catch((err) => console.log(err));
+    async function main() {
+        await mongoose.connect(connString);
+    }
+
+    return true;
 }
 
 
@@ -35,5 +52,7 @@ function createApp(): express.Express {
 
 const app: express.Express = createApp();
 
+// await setupDatabaseConn();
 
-export = app;
+
+export {app} ;
