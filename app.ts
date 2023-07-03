@@ -52,7 +52,7 @@ function createApp(): express.Express {
 
 const app: express.Express = createApp();
 
-// await setupDatabaseConn();
+await setupDatabaseConn();
 
 
 export {app} ;
