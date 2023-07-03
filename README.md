@@ -3,6 +3,12 @@
 An app to manage inventory at a musical instrument store.
 
 
+## Prerequisites
+
+* Node JS installed.
+* A running Mongo DB instance.
+
+
 ## Connecting to a database
 
 To connect to your desired Mongo DB instance, do the following:
