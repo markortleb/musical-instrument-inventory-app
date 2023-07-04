@@ -1,4 +1,5 @@
-import * as express from 'express';
+import express from 'express';
+import InventoryItem from "../models/InventoryItem";
 
 const router: express.Router = express.Router();
 // const urlencodedParser: any =  express.urlencoded({ extended: false });
