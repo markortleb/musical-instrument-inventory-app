@@ -2,21 +2,27 @@ import mongoose, { Schema, model, Document } from "mongoose";
 
 
 interface IInventoryItem extends Document{
-    id: string,
     name: string,
     description: string,
     price: number
 }
 
 
-const inventoryItemSchema = new Schema<IInventoryItem> ({
-    id: {type: String, required: true},
-    name: {type: String, required: true},
-    description: {type: String, required: true},
-    price: {type: Number, required: true},
+const InventoryItemSchema = new Schema<IInventoryItem> (
+    {
+        name: {type: String, required: true},
+        description: {type: String, required: true},
+        price: {type: Number, required: true},
+    }
+);
+
+
+
+InventoryItemSchema.virtual('url').get( function() {
+    return '/inventoryitem/' + this._id;
 });
 
+const InventoryItem = model<IInventoryItem>('inventory_item', InventoryItemSchema);
 
-const InventoryItem = model<IInventoryItem>('InventortyItem', inventoryItemSchema);
 
 export default InventoryItem;
