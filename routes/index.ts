@@ -1,5 +1,7 @@
 import express from 'express';
-import InventoryItem from "../models/InventoryItem";
+import mongoose from "mongoose";
+import createInventoryItem from '../controllers/InventoryItemController.js';
+
 
 const router: express.Router = express.Router();
 // const urlencodedParser: any =  express.urlencoded({ extended: false });
@@ -11,8 +13,12 @@ router.get('/', function(req, res, next) {
             title: 'Musical Instrument Inventory App'
         }
     );
+    console.log("Hi");
+    createInventoryItem();
     next();
 });
+
+
 
 
 export { router };

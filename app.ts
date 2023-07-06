@@ -5,6 +5,7 @@ import express from 'express';
 import mongoose from 'mongoose';
 import {router as indexRouter} from './routes/index.js';
 
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -19,20 +20,18 @@ function getMongoConnString(): string {
         fs.readFileSync(path.join(__dirname, '../db_conn_info/db_conn_info.json'), 'utf-8')
     );
 
-    return `mongodb+srv://${dbConnInfo.username}:${dbConnInfo.password}@${dbConnInfo.hostname}/?retryWrites=true&w=majority`;
+    return `mongodb+srv://${dbConnInfo.username}:${dbConnInfo.password}@${dbConnInfo.hostname}/?retryWrites=true&w=majority&ssl=true`;
 }
 
 
-async function setupDatabaseConn(): Promise<boolean> {
-    const connString =getMongoConnString();
+function setupDatabaseConn() {
+    const connString = getMongoConnString();
 
     mongoose.set('strictQuery', false);
     main().catch((err) => console.log(err));
     async function main() {
         await mongoose.connect(connString);
     }
-
-    return true;
 }
 
 
@@ -50,9 +49,9 @@ function createApp(): express.Express {
 }
 
 
-const app: express.Express = createApp();
+setupDatabaseConn();
 
-await setupDatabaseConn();
+const app: express.Express = createApp();
 
 
 export {app} ;
