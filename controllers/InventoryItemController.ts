@@ -1,12 +1,21 @@
+import expressAsyncHandler from "express-async-handler";
 import InventoryItem from "../models/InventoryItem.js";
+import express from "express";
 
 
 
-export default async function createInventoryItem() {
-    const inventoryItem = new InventoryItem({
-        inventoryItemId: 'test2',
-        price: 1233.0
-    });
+const createInventoryItem: express.RequestHandler = expressAsyncHandler(
+    async (req: express.Request, res: express.Response, next: express.NextFunction) => {
+        const inventoryItem = new InventoryItem({
+            inventoryItemId: 'test2',
+            price: 1233.0
+        });
 
-    await inventoryItem.save();
+        await inventoryItem.save();
+});
+
+
+export {
+    createInventoryItem
 }
+
