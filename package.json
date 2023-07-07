@@ -7,7 +7,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc && sass --no-source-map ./public/scss:./dist/public/css",
-    "start": "node ./dist/bin/server.js"
+    "start": "node ./dist/bin/server.js",
+    "reset": "node ./dist/resetDataModels.js"
   },
   "author": "",
   "license": "ISC",
@@ -22,6 +23,7 @@
     "pug": "^3.0.2",
     "sass": "^1.63.6",
     "tslint": "^6.1.3",
-    "typescript": "^5.1.6"
+    "typescript": "^5.1.6",
+    "uniqid": "^5.4.0"
   }
 }

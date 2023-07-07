@@ -1,4 +1,15 @@
-extends layout.pug
-
-block body
-    h2 Hi Mark
+html
+    head
+        title #{title}
+        link(rel="stylesheet" href="/css/meyerweb_reset.css")
+        link(rel="stylesheet" href="/css/style.css")
+    body
+        header
+            h1 #{title}
+        main
+            h2 Categories
+            ul
+                li Guitars
+                li Drums
+                li
+                    button Add Category

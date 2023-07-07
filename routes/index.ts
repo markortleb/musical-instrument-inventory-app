@@ -14,7 +14,7 @@ router.get('/', function(req, res, next) {
         }
     );
     console.log("Hi");
-    createInventoryItem(req, res, next);
+    // createInventoryItem(req, res, next);
     next();
 });
 
