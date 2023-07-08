@@ -22,16 +22,21 @@ function getMongoConnString(): string {
 }
 
 
-function setupDatabaseConn() {
+async function connect(): Promise<void> {
     const connString = getMongoConnString();
 
     mongoose.set('strictQuery', false);
-    main().catch((err) => console.log(err));
-    async function main() {
-        await mongoose.connect(connString);
-    }
+    await mongoose.connect(connString);
 }
 
 
 
-export default setupDatabaseConn;
+async function disconnect(): Promise<void> {
+    await mongoose.disconnect();
+}
+
+
+export {
+    connect,
+    disconnect
+}
