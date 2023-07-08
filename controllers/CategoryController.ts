@@ -6,13 +6,13 @@ import express from "express";
 
 // Database Functions
 
-const createCategory = (name: string): void => {
+const createCategory = async (name: string): Promise<void> => {
     const category = new Category({
         name: name,
         categoryId: uniqid()
     });
 
-    category.save();
+    await category.save();
 };
 
 
@@ -21,7 +21,7 @@ const createCategory = (name: string): void => {
 
 const createCategoryHandler: express.RequestHandler = expressAsyncHandler(
     async (req: express.Request, res: express.Response, next: express.NextFunction): Promise<void> => {
-        // await createCategory(req.body.name);
+        await createCategory(req.body.name);
     }
 );
 
