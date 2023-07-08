@@ -9,7 +9,7 @@ html
         main
             h2 Categories
             ul
-                li Guitars
-                li Drums
+                each val, key in categories
+                    li #{val.name}
                 li
                     button Add Category
