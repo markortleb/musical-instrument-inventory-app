@@ -6,8 +6,7 @@ interface IProduct extends Document{
     brand: string,
     name: string,
     description: string,
-    categoryId: string,
-    subCategoryId: string
+    categoryId: string
 }
 
 
@@ -17,8 +16,7 @@ const ProductSchema = new Schema<IProduct> (
         brand: {type: String, required: true},
         name: {type: String, required: true},
         description: {type: String, required: true},
-        categoryId: {type: String, required: true},
-        subCategoryId: {type: String, required: true}
+        categoryId: {type: String, required: true}
     }
 );
 

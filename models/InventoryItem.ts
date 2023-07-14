@@ -3,6 +3,7 @@ import mongoose, { Schema, model, Document } from "mongoose";
 
 interface IInventoryItem extends Document{
     inventoryItemId: string,
+    productId: string,
     price: number
 }
 
@@ -10,6 +11,7 @@ interface IInventoryItem extends Document{
 const InventoryItemSchema = new Schema<IInventoryItem> (
     {
         inventoryItemId: {type: String, required: true},
+        productId: {type: String, required: true},
         price: {type: Number, required: true},
     }
 );

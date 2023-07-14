@@ -1,16 +1,14 @@
 import Category from "../models/Category.js";
-import uniqid from 'uniqid';
 import expressAsyncHandler from "express-async-handler";
 import express from "express";
-import {type} from "os";
 
 
 // Database Functions
 
-const createCategory = async (name: string): Promise<void> => {
+const createCategory = async (categoryId: string, name: string): Promise<void> => {
     const category = new Category({
-        name: name,
-        categoryId: uniqid()
+        categoryId: categoryId,
+        name: name
     });
 
     await category.save();
@@ -23,11 +21,11 @@ const getAll = async (): Promise<any> => {
 
 // Handlers
 
-const createCategoryHandlerPost: express.RequestHandler = expressAsyncHandler(
-    async (req: express.Request, res: express.Response, next: express.NextFunction): Promise<void> => {
-        await createCategory(req.body.name);
-    }
-);
+// const createCategoryHandlerPost: express.RequestHandler = expressAsyncHandler(
+//     async (req: express.Request, res: express.Response, next: express.NextFunction): Promise<void> => {
+//         await createCategory(req.body.name);
+//     }
+// );
 
 
 const getAllHandler: express.RequestHandler = expressAsyncHandler(
@@ -44,6 +42,6 @@ export {
     getAll,
 
     // Handlers
-    createCategoryHandlerPost,
+    // createCategoryHandlerPost,
     getAllHandler
 }
