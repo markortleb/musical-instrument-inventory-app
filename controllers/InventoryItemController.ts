@@ -20,17 +20,25 @@ const createInventoryItem = async (inventoryItemId: string,
     await inventoryItem.save();
 };
 
-// const getAll = async (): Promise<any> => {
-//     return await Category.find().exec();
-// };
+const getAll = async (): Promise<any> => {
+    return await InventoryItem.find().exec();
+};
 
 
 // Handlers
 
-
+// const getAllHandler: express.RequestHandler = expressAsyncHandler(
+//     async (req: express.Request, res: express.Response, next: express.NextFunction): Promise<any> => {
+//         res.locals.categories = await getAll();
+//         next();
+//     }
+// );
 
 export {
     // Database Functions
     createInventoryItem,
-    // getAll,
+    getAll,
+
+    // Handlers
+
 }
