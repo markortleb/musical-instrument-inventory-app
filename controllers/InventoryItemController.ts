@@ -1,5 +1,4 @@
 import InventoryItem from "../models/InventoryItem.js";
-import Category from "../models/Category.js";
 import expressAsyncHandler from "express-async-handler";
 import express from "express";
 
@@ -23,33 +22,44 @@ const getAll = async (): Promise<any> => {
     return await InventoryItem.find().exec();
 };
 
-const getByCategory = async (categoryName): Promise<any> => {
-    return await Category.find({name: categoryName}).exec();
-}
+const getByProductIdList = async (productIdList): Promise<any> => {
+    return await InventoryItem.find(
+        {productId:
+            {
+                '$in': productIdList
+            }
+        }
+    ).exec();
+};
 
 
 // Handlers
 
 const getAllHandler: express.RequestHandler = expressAsyncHandler(
     async (req: express.Request, res: express.Response, next: express.NextFunction): Promise<any> => {
-        res.locals.categories = await getAll();
+        res.locals.inventoryItems = await getAll();
         next();
     }
 );
 
-const getByCategoryHandler: express.RequestHandler = expressAsyncHandler(
+
+const getByProductListHandler: express.RequestHandler = expressAsyncHandler(
     async (req: express.Request, res: express.Response, next: express.NextFunction): Promise<any> => {
-        res.locals.categories = await getByCategory(req.params.name);
+        const productIdList = [... new Set(res.locals.products.map(item => item.productId))];
+        console.log(productIdList);
+        res.locals.inventoryItems = await getByProductIdList(productIdList);
         next();
     }
 );
+
 
 export {
     // Database Functions
     createInventoryItem,
     getAll,
-    getByCategory,
+    getByProductIdList,
 
     // Handlers
-    getByCategoryHandler
+    getAllHandler,
+    getByProductListHandler
 }

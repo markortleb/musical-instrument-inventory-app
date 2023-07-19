@@ -1,6 +1,7 @@
 import express from 'express';
 import * as CategoryController from '../controllers/CategoryController.js';
 import * as  InventoryItemController from "../controllers/InventoryItemController.js";
+import * as  ProductController from "../controllers/ProductController.js";
 
 
 const router: express.Router = express.Router();
@@ -23,9 +24,11 @@ router.get('/',
 
 
 router.get('/category/:name',
-    InventoryItemController.getByCategoryHandler,
+    CategoryController.getByNameHandler,
+    ProductController.getByCategoryHandler,
+    InventoryItemController.getByProductListHandler,
     function(req: express.Request, res: express.Response, next: express.NextFunction) {
-        console.log(res.locals.categories);
+        console.log(res.locals.inventoryItems);
         res.render(
             'category',
             {

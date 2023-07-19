@@ -18,6 +18,10 @@ const getAll = async (): Promise<any> => {
     return await Category.find().exec();
 };
 
+const getByName = async (categoryName): Promise<any> => {
+    return await Category.find({name: categoryName}).exec();
+}
+
 
 // Handlers
 
@@ -35,6 +39,15 @@ const getAllHandler: express.RequestHandler = expressAsyncHandler(
     }
 );
 
+const getByNameHandler: express.RequestHandler = expressAsyncHandler(
+    async (req: express.Request, res: express.Response, next: express.NextFunction): Promise<any> => {
+
+        // There should always be only one category per name
+        res.locals.category = (await getByName(req.params.name))[0];
+        next();
+    }
+);
+
 
 export {
     // Database Functions
@@ -43,5 +56,6 @@ export {
 
     // Handlers
     // createCategoryHandlerPost,
-    getAllHandler
+    getAllHandler,
+    getByNameHandler
 }
