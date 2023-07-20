@@ -46,5 +46,18 @@ h2 {
 .inventory-items li {
   border: 1px solid black;
   border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1em;
+  gap: 1em
+}
+
+.inventory-items li .product-name {
+  font-weight: bold;
+}
+
+.inventory-items li .inventory-item-id {
+  font-size: 0.8em;
 }
 

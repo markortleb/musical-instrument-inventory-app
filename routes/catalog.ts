@@ -2,6 +2,7 @@ import express from 'express';
 import * as CategoryController from '../controllers/CategoryController.js';
 import * as  InventoryItemController from "../controllers/InventoryItemController.js";
 import * as  ProductController from "../controllers/ProductController.js";
+import capitalizeFirstLetter from "../util/capitalizeFirstLetter.js";
 
 
 const router: express.Router = express.Router();
@@ -31,6 +32,10 @@ router.get('/category/:name',
         const enrichedInventoryItems = res.locals.inventoryItems.map(item =>{
             const product = res.locals.products.find(x => x.productId === item.productId);
             item.productName = product.name;
+            item.formattedPrice = item.price.toLocaleString('en-US', {
+                style: 'currency',
+                currency: 'USD'
+            });
             return item;
         });
 
@@ -38,7 +43,7 @@ router.get('/category/:name',
             'category',
             {
                 title: 'Musical Instrument Inventory App',
-                name: req.params.name,
+                name: capitalizeFirstLetter(req.params.name),
                 inventoryItems: res.locals.inventoryItems
             }
         );
