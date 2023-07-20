@@ -28,13 +28,18 @@ router.get('/category/:name',
     ProductController.getByCategoryHandler,
     InventoryItemController.getByProductListHandler,
     function(req: express.Request, res: express.Response, next: express.NextFunction) {
-        console.log(res.locals.inventoryItems);
+        const enrichedInventoryItems = res.locals.inventoryItems.map(item =>{
+            const product = res.locals.products.find(x => x.productId === item.productId);
+            item.productName = product.name;
+            return item;
+        });
+
         res.render(
             'category',
             {
                 title: 'Musical Instrument Inventory App',
                 name: req.params.name,
-                inventoryItems: []
+                inventoryItems: res.locals.inventoryItems
             }
         );
         next();

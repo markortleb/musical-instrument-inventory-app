@@ -1,0 +1,50 @@
+$base-color: #d0d5d5;
+$header-color: #a1b09c;
+
+body {
+  background-color: $base-color;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  padding: 2em;
+  border-bottom: 1px solid black;
+  background-color: $header-color;
+}
+
+h1 {
+  font-size: 2em;
+}
+
+main {
+  padding: 2em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5em;
+}
+
+h2 {
+  font-size: 1.3em;
+}
+
+.inventory-items {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  flex-direction: column;
+  align-items: center;
+  gap: 1em;
+  list-style: none;
+}
+
+.inventory-items li {
+  border: 1px solid black;
+  border-radius: 15px;
+}
+

@@ -2,10 +2,17 @@ html
     head
         title #{title}
         link(rel="stylesheet" href="/css/meyerweb_reset.css")
-        link(rel="stylesheet" href="/css/style.css")
+        link(rel="stylesheet" href="/css/category.css")
     body
         header
             h1 #{title}
         main
             h2 #{name}
+            ul(class="inventory-items")
+                each val, key in inventoryItems
+                    li
+                        div(class="product-name") #{val.productName}
+                        div(class="inventory-item-id") #{val.inventoryItemId}
+                        div(class="price") #{val.price}
+
 
