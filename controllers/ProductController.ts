@@ -32,6 +32,11 @@ const getByCategoryId = async (categoryId): Promise<any> => {
 };
 
 
+const getById = async (productId): Promise<any> => {
+    return await Product.find({ productId: productId }).exec();
+};
+
+
 // Handlers
 
 const getAllHandler: express.RequestHandler = expressAsyncHandler(
@@ -49,14 +54,23 @@ const getByCategoryHandler: express.RequestHandler = expressAsyncHandler(
     }
 );
 
+const getByIdHandler: express.RequestHandler = expressAsyncHandler(
+    async (req: express.Request, res: express.Response, next: express.NextFunction): Promise<any> => {
+        res.locals.product = (await getById(res.locals.inventoryItem.productId))[0];
+        next();
+    }
+);
+
 
 export {
     // Database Functions
     createProduct,
     getAll,
     getByCategoryId,
+    getById,
 
     // Handlers
     getAllHandler,
-    getByCategoryHandler
+    getByCategoryHandler,
+    getByIdHandler
 }

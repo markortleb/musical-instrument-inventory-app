@@ -33,6 +33,11 @@ const getByProductIdList = async (productIdList): Promise<any> => {
 };
 
 
+const getById = async (inventoryItemId): Promise<any> => {
+    return await InventoryItem.find({inventoryItemId: inventoryItemId}).exec();
+};
+
+
 // Handlers
 
 const getAllHandler: express.RequestHandler = expressAsyncHandler(
@@ -52,6 +57,13 @@ const getByProductListHandler: express.RequestHandler = expressAsyncHandler(
     }
 );
 
+const getByIdHandler: express.RequestHandler = expressAsyncHandler(
+    async (req: express.Request, res: express.Response, next: express.NextFunction): Promise<any> => {
+        res.locals.inventoryItem = (await getById(req.params.inventoryitemid))[0];
+        next();
+    }
+);
+
 
 export {
     // Database Functions
@@ -61,5 +73,6 @@ export {
 
     // Handlers
     getAllHandler,
-    getByProductListHandler
+    getByProductListHandler,
+    getByIdHandler
 }

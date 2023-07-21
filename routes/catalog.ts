@@ -3,6 +3,7 @@ import * as CategoryController from '../controllers/CategoryController.js';
 import * as  InventoryItemController from "../controllers/InventoryItemController.js";
 import * as  ProductController from "../controllers/ProductController.js";
 import capitalizeFirstLetter from "../util/capitalizeFirstLetter.js";
+import {getByIdHandler} from "../controllers/InventoryItemController.js";
 
 
 const router: express.Router = express.Router();
@@ -53,13 +54,15 @@ router.get('/category/:name',
 
 
 router.get('/inventoryitem/:inventoryitemid',
+    InventoryItemController.getByIdHandler,
+    ProductController.getByIdHandler,
     function(req: express.Request, res: express.Response, next: express.NextFunction) {
-        console.log(req.params.inventoryitemid);
         res.render(
             'inventoryItem',
             {
                 title: 'Musical Instrument Inventory App',
-                inventoryItemId: req.params.inventoryitemid
+                inventoryItem: res.locals.inventoryItem,
+                product: res.locals.product
             }
         );
         next();
