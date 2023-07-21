@@ -52,4 +52,19 @@ router.get('/category/:name',
 );
 
 
+router.get('/inventoryitem/:inventoryitemid',
+    function(req: express.Request, res: express.Response, next: express.NextFunction) {
+        console.log(req.params.inventoryitemid);
+        res.render(
+            'inventoryItem',
+            {
+                title: 'Musical Instrument Inventory App',
+                inventoryItemId: req.params.inventoryitemid
+            }
+        );
+        next();
+    }
+);
+
+
 export { router };

@@ -1,5 +1,6 @@
 $base-color: #d0d5d5;
 $header-color: #a1b09c;
+$card-color: #acf5f5;
 
 body {
   background-color: $base-color;
@@ -56,6 +57,8 @@ h2 {
   gap: 1em;
   text-decoration: none !important;
   color: inherit;
+  background-color: $card-color;
+  border-radius: inherit;
 }
 
 .inventory-items li .product-name {
