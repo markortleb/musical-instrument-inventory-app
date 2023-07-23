@@ -93,6 +93,14 @@ router.get('/create/category',
 );
 
 
+router.post('/create/category',
+    function(req: express.Request, res: express.Response, next: express.NextFunction) {
+        console.log(req.body);
+        next();
+    }
+);
+
+
 
 router.get('/category/:name/createInventoryItem/',
     function(req: express.Request, res: express.Response, next: express.NextFunction) {

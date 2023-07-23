@@ -2,9 +2,14 @@ html
     head
         title #{title}
         link(rel="stylesheet" href="/css/meyerweb_reset.css")
-        link(rel="stylesheet" href="/css/category.css")
+        link(rel="stylesheet" href="/css/createCategory.css")
     body
         header
             h1 #{title}
         main
             h2 Create Category
+            form(action='/catalog/create/category' method="post")
+                div(class="form-row")
+                    label(for="categoryName") Name:
+                    input(type="text" id="categoryName" name="categoryName")
+                button Submit

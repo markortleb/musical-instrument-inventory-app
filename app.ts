@@ -5,6 +5,7 @@ import express from 'express';
 import mongoose from 'mongoose';
 import {router as indexRouter} from './routes/index.js';
 import {router as catalogRouter} from './routes/catalog.js';
+import exp from "constants";
 
 
 const __filename = fileURLToPath(import.meta.url);
@@ -41,6 +42,9 @@ function createApp(): express.Express {
 
     newApp.set('views', path.join(__dirname, '../views'));
     newApp.set('view engine', 'pug');
+
+    newApp.use(express.json());
+    newApp.use(express.urlencoded({ extended: false }));
 
     newApp.use(express.static(path.join(__dirname, './public')));
 
