@@ -4,6 +4,7 @@ import * as  InventoryItemController from "../controllers/InventoryItemControlle
 import * as  ProductController from "../controllers/ProductController.js";
 import capitalizeFirstLetter from "../util/capitalizeFirstLetter.js";
 import {getByIdHandler} from "../controllers/InventoryItemController.js";
+import inventoryItem from "../models/InventoryItem";
 
 
 const router: express.Router = express.Router();
@@ -13,11 +14,15 @@ const router: express.Router = express.Router();
 router.get('/',
     CategoryController.getAllHandler,
     function(req: express.Request, res: express.Response, next: express.NextFunction) {
+        const enrichedCategories = res.locals.categories.map(item => {
+            item.name = capitalizeFirstLetter(item.name);
+            return item;
+        });
         res.render(
             'index',
             {
                 title: 'Musical Instrument Inventory App',
-                categories: res.locals.categories
+                categories: enrichedCategories
             }
         );
         next();
@@ -57,11 +62,17 @@ router.get('/inventoryitem/:inventoryitemid',
     InventoryItemController.getByIdHandler,
     ProductController.getByIdHandler,
     function(req: express.Request, res: express.Response, next: express.NextFunction) {
+        let formattedPrice = res.locals.inventoryItem.price.toLocaleString('en-US', {
+            style: 'currency',
+            currency: 'USD'
+        });
+
         res.render(
             'inventoryItem',
             {
                 title: 'Musical Instrument Inventory App',
                 inventoryItem: res.locals.inventoryItem,
+                formattedPrice: formattedPrice,
                 product: res.locals.product
             }
         );

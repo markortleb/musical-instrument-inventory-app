@@ -2,11 +2,20 @@ html
     head
         title #{title}
         link(rel="stylesheet" href="/css/meyerweb_reset.css")
-        link(rel="stylesheet" href="/css/category.css")
+        link(rel="stylesheet" href="/css/inventoryItem.css")
     body
         header
             h1 #{title}
         main
-            h2 #{product.name}
+            h2 #{inventoryItem.inventoryItemId}
+            div(class="info-area")
+                span(class="name") #{product.name}
+                span(class="price") #{formattedPrice}
+                span(class="description") #{product.description}
+            div(class="control-buttons")
+                a(class="edit" href=`/catalog/inventoryitem/${inventoryItem.inventoryItemId}/edit`)
+                    span Edit
+                a(class="delete" href=`/catalog/inventoryitem/${inventoryItem.inventoryItemId}/delete`)
+                    span Delete
 
 

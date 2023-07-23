@@ -2,14 +2,20 @@ html
     head
         title #{title}
         link(rel="stylesheet" href="/css/meyerweb_reset.css")
-        link(rel="stylesheet" href="/css/style.css")
+        link(rel="stylesheet" href="/css/index.css")
     body
         header
             h1 #{title}
         main
+            p
+                | Welcome to the musical inventory application. This app will enable you, the worker
+                | of a musical instrument store, to manage your inventory. You will be able to create,
+                | read, update, and delete inventory items. You can categorize your wares. And you can
+                | modify details about the products you are selling. We hope you enjoy our app.
             h2 Categories
-            each val, key in categories
+            ul
+                each val, key in categories
+                    li
+                        a(href=`/catalog/category/${val.name.toLowerCase()}`) #{val.name}
                 li
-                    a(href=`/catalog/category/${val.name.toLowerCase()}`) #{val.name}
-            li
-                button Add Category
+                    button Add Category

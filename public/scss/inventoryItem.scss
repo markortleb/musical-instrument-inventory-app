@@ -1,5 +1,6 @@
 $base-color: #d0d5d5;
 $header-color: #a1b09c;
+$card-color: #acf5f5;
 
 body {
   background-color: $base-color;
@@ -34,13 +35,43 @@ h2 {
   font-size: 1.3em;
 }
 
-main ul {
+.info-area {
+  padding: 2em 4em 2em 4em;
   display: flex;
   flex-direction: column;
-  align-items: center;
   gap: 1em;
+  align-items: center;
+  border: 1px solid black;
+  border-radius: 15px;
 }
 
-main ul li:hover {
+.info-area .description {
+  line-height: 1.5em;
+}
+
+.control-buttons {
+  display: flex;
+  flex-direction: row;
+  gap: 2em;
+}
+
+.control-buttons a {
+  text-decoration: none;
+  padding-top: 1em;
+  padding-bottom: 1em;
+  border: 1px solid black;
+  border-radius: 15px;
+  width: 9em;
+  text-align: center;
+  color: black;
   font-weight: bold;
 }
+
+.edit {
+  background-color: #ffe437;
+}
+
+.delete {
+  background-color: red;
+}
+

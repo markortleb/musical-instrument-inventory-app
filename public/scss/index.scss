@@ -1,0 +1,58 @@
+$base-color: #d0d5d5;
+$header-color: #a1b09c;
+
+
+body {
+  background-color: $base-color;
+  display: flex;
+  flex-direction: column;
+}
+
+header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  padding: 2em;
+  border-bottom: 1px solid black;
+  background-color: $header-color;
+}
+
+h1 {
+  font-size: 2em;
+}
+
+main {
+  padding: 2em 6em 2em 6em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5em;
+}
+
+main p {
+  line-height: 1.2em;
+  text-align: center;
+}
+
+h2 {
+  font-size: 1.3em;
+}
+
+main ul {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1em;
+  list-style: none;
+}
+
+main ul li:hover {
+  font-weight: bold;
+}
+
+main ul li a {
+  text-decoration: none;
+  color: black;
+}
+

@@ -15,5 +15,8 @@ html
                             div(class="product-name") #{val.productName}
                             div(class="inventory-item-id") #{val.inventoryItemId}
                             div(class="price") #{val.formattedPrice}
+                li
+                    a(href=`/catalog/category/${name.toLowerCase()}/createInventoryItem/`)
+                        span Create New Inventory Item
 
 
