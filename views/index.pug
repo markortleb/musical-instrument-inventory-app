@@ -17,5 +17,6 @@ html
                 each val, key in categories
                     li
                         a(href=`/catalog/category/${val.name.toLowerCase()}`) #{val.name}
-                li
-                    button Add Category
+
+            a(class="create-category-button" href='/catalog/create/category')
+                span Create Category

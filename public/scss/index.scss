@@ -56,3 +56,18 @@ main ul li a {
   color: black;
 }
 
+.create-category-button {
+  padding: 1em;
+  width: 8em;
+  border: 1px solid black;
+  border-radius: 15px;
+  text-align: center;
+  text-decoration: none;
+  color: black;
+  background-color: darkseagreen;
+}
+
+.create-category-button:hover {
+  background-color: lightgreen;
+}
+
