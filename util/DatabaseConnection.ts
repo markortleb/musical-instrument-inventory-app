@@ -38,6 +38,7 @@ async function disconnect(): Promise<void> {
 
 
 export {
+    getMongoConnString,
     connect,
     disconnect
 }

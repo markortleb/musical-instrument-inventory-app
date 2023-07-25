@@ -1,6 +1,8 @@
-
+import * as DatabaseConnection from "./util/DatabaseConnection.js";
 import { MongoClient, ServerApiVersion } from 'mongodb';
-const uri = "mongodb+srv://markortleb:X0BLIUTzEK6sLKDO@mark-cluster.bo6o6rq.mongodb.net/?retryWrites=true&w=majority";
+
+
+const uri = DatabaseConnection.getMongoConnString();
 
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
 const client = new MongoClient(uri, {

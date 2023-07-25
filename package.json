@@ -9,7 +9,8 @@
     "build": "tsc && sass --no-source-map ./public/scss:./dist/public/css",
     "watch": "concurrently --kill-others \"tsc -w\" \"sass --watch --no-source-map ./public/scss:./dist/public/css \"",
     "start": "node ./dist/bin/server.js",
-    "seed": "node ./dist/seedDataModels.js"
+    "seed": "node ./dist/seedDataModels.js",
+    "testServer": "node ./dist/testServer.js"
   },
   "author": "",
   "license": "ISC",
