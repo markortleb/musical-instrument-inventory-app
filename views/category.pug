@@ -18,5 +18,5 @@ html
                 li
                     a(href=`/catalog/category/${name.toLowerCase()}/createInventoryItem/`)
                         span Create New Inventory Item
-
-
+            a(class="delete-button" href=`/catalog/delete/category/${name.toLowerCase()}`)
+                span Delete #{name} Category

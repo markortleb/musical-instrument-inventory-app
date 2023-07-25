@@ -1,12 +1,11 @@
 import express from 'express';
 import * as CategoryController from '../controllers/CategoryController.js';
-import * as  InventoryItemController from "../controllers/InventoryItemController.js";
-import * as  ProductController from "../controllers/ProductController.js";
+import * as InventoryItemController from "../controllers/InventoryItemController.js";
+import * as ProductController from "../controllers/ProductController.js";
 import capitalizeFirstLetter from "../util/capitalizeFirstLetter.js";
 
 
 const router: express.Router = express.Router();
-
 
 
 router.get('/',
@@ -94,8 +93,9 @@ router.get('/create/category',
 
 
 router.post('/create/category',
+    CategoryController.createCategoryHandler,
     function(req: express.Request, res: express.Response, next: express.NextFunction) {
-        console.log(req.body);
+        res.redirect('/catalog');
         next();
     }
 );
@@ -115,6 +115,13 @@ router.get('/category/:name/createInventoryItem/',
 );
 
 
+router.get('/delete/category/:name',
+    CategoryController.deleteByNameHandler,
+    function(req: express.Request, res: express.Response, next: express.NextFunction) {
+        res.redirect('/catalog');
+        next();
+    }
+);
 
 
 export { router };
