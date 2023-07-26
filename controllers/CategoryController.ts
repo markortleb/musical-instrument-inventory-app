@@ -1,7 +1,7 @@
 import Category from "../models/Category.js";
 import expressAsyncHandler from "express-async-handler";
 import express from "express";
-import uniqid from 'uniqid';
+import {randomUUID} from "crypto";
 
 
 // Database Functions
@@ -29,12 +29,16 @@ const deleteByName = async (categoryName): Promise<any> => {
     await Category.find({name: categoryName}).deleteMany().exec();
 };
 
+const deleteAll = async (): Promise<any> => {
+    return await Category.find().deleteMany().exec();
+};
+
 
 // Handlers
 
 const createCategoryHandler: express.RequestHandler = expressAsyncHandler(
     async (req: express.Request, res: express.Response, next: express.NextFunction): Promise<void> => {
-        await createCategory(uniqid(), req.body.categoryName);
+        await createCategory(randomUUID(), req.body.categoryName);
         next();
     }
 );
@@ -50,7 +54,7 @@ const getAllHandler: express.RequestHandler = expressAsyncHandler(
 
 const getByNameHandler: express.RequestHandler = expressAsyncHandler(
     async (req: express.Request, res: express.Response, next: express.NextFunction): Promise<any> => {
-
+        console.log("hi");
         // There should always be only one category per name
         res.locals.category = (await getByName(req.params.name))[0];
         next();
@@ -71,6 +75,7 @@ export {
     createCategory,
     getAll,
     deleteByName,
+    deleteAll,
 
     // Handlers
     createCategoryHandler,

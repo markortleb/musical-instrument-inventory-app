@@ -1,6 +1,7 @@
 import Product from "../models/Product.js";
 import expressAsyncHandler from "express-async-handler";
 import express from "express";
+import Category from "../models/Category";
 
 
 // Database Functions
@@ -36,6 +37,10 @@ const getById = async (productId): Promise<any> => {
     return await Product.find({ productId: productId }).exec();
 };
 
+const deleteAll = async (): Promise<any> => {
+    return await Product.find().deleteMany().exec();
+};
+
 
 // Handlers
 
@@ -68,6 +73,7 @@ export {
     getAll,
     getByCategoryId,
     getById,
+    deleteAll,
 
     // Handlers
     getAllHandler,

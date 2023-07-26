@@ -1,6 +1,7 @@
 import InventoryItem from "../models/InventoryItem.js";
 import expressAsyncHandler from "express-async-handler";
 import express from "express";
+import Category from "../models/Category";
 
 
 // Database Functions
@@ -37,6 +38,10 @@ const getById = async (inventoryItemId): Promise<any> => {
     return await InventoryItem.find({inventoryItemId: inventoryItemId}).exec();
 };
 
+const deleteAll = async (): Promise<any> => {
+    return await InventoryItem.find().deleteMany().exec();
+};
+
 
 // Handlers
 
@@ -70,6 +75,7 @@ export {
     createInventoryItem,
     getAll,
     getByProductIdList,
+    deleteAll,
 
     // Handlers
     getAllHandler,

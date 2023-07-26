@@ -59,7 +59,7 @@ function loadCSV(inputPath: string) {
 }
 
 
-await DatabaseConnection.connect();
+
 
 let initialCategories = await loadCSV(path.join(__dirname, '../seeds/initialCategories.csv'));
 let initialProducts = await loadCSV(path.join(__dirname, '../seeds/initialProducts.csv'));
@@ -67,6 +67,12 @@ let initialInventoryItems = await loadCSV(path.join(__dirname, '../seeds/initial
 
 
 await DatabaseConnection.connect();
+
+
+await CategoryController.deleteAll();
+await InventoryItemController.deleteAll();
+await ProductController.deleteAll();
+
 
 //@ts-ignore
 initialCategories.forEach(async item => {
