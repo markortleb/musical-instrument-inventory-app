@@ -2,9 +2,23 @@ html
     head
         title #{title}
         link(rel="stylesheet" href="/css/meyerweb_reset.css")
-        link(rel="stylesheet" href="/css/category.css")
+        link(rel="stylesheet" href="/css/createInventoryItem.css")
     body
         header
             h1 #{title}
         main
             h2 Create Inventory Item
+            form(action='/catalog/create/category' method="post")
+                div(class="form-section dropdown")
+                    span Product:
+                    ul
+                        li(class="dropdown-row")
+                            label(for="gibson") Gibson:
+                            input(type="radio" id="gibson" name="productName" value="Gibson")
+                        li(class="dropdown-row")
+                            label(for="fender") Fender:
+                            input(type="radio" id="fender" name="productName" value="Fender")
+                div(class="form-section")
+                    label(for="price") Price:
+                    input(type="text" id="price" name="price")
+                button Submit
