@@ -54,7 +54,6 @@ const getAllHandler: express.RequestHandler = expressAsyncHandler(
 
 const getByNameHandler: express.RequestHandler = expressAsyncHandler(
     async (req: express.Request, res: express.Response, next: express.NextFunction): Promise<any> => {
-        console.log("hi");
         // There should always be only one category per name
         res.locals.category = (await getByName(req.params.name))[0];
         next();

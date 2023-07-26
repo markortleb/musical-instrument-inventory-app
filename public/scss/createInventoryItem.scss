@@ -32,15 +32,16 @@ main {
 }
 
 h2 {
-  font-size: 1.3em;
+  font-size: 1.5em;
 }
 
 form {
   display: flex;
   flex-direction: column;
-  gap: 1em;
+  gap: 2em;
   align-items: center;
 }
+
 
 .form-section {
   display: flex;
@@ -50,18 +51,32 @@ form {
 }
 
 
-ul {
-  display: none;
-  position: absolute;
-  background-color: #f9f9f9;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  padding: 12px 16px;
-  z-index: 1;
+.product-area {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
 }
 
-.dropdown:hover ul {
-  display: block;
+.product-area li {
+  text-align: center;
+}
+
+
+.product-area li input {
+  display: none;
+}
+
+.product-area label:hover{
+  font-weight: bolder;
+}
+
+input:checked ~ label{
+  color: blue;
+}
+
+
+.product-area-header, .price-label {
+  font-size: 1.2em;
+  font-weight: bold;
 }
 
 

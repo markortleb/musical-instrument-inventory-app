@@ -9,16 +9,15 @@ html
         main
             h2 Create Inventory Item
             form(action='/catalog/create/category' method="post")
-                div(class="form-section dropdown")
-                    span Product:
-                    ul
-                        li(class="dropdown-row")
-                            label(for="gibson") Gibson:
-                            input(type="radio" id="gibson" name="productName" value="Gibson")
-                        li(class="dropdown-row")
-                            label(for="fender") Fender:
-                            input(type="radio" id="fender" name="productName" value="Fender")
                 div(class="form-section")
-                    label(for="price") Price:
-                    input(type="text" id="price" name="price")
+                    span(class="product-area-header") Product:
+                    ul(class="product-area")
+                        each val, key in products
+                            li(class="radio-group")
+
+                                input(type="radio" id=`${val.productId}` name="productId" value=`${val.productId}`)
+                                label(for=`${val.productId}`) #{val.name}
+                div(class="form-section")
+                    label(class="price-label" for="price") Price:
+                    input(type="number" id="price" name="price")
                 button Submit
