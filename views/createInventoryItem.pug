@@ -8,16 +8,15 @@ html
             h1 #{title}
         main
             h2 Create Inventory Item
-            form(action='/catalog/create/category' method="post")
+            form(action=`/catalog/create/inventoryItem/${categoryName}` method="post")
                 div(class="form-section")
                     span(class="product-area-header") Product:
                     ul(class="product-area")
                         each val, key in products
                             li(class="radio-group")
-
-                                input(type="radio" id=`${val.productId}` name="productId" value=`${val.productId}`)
+                                input(type="radio" id=`${val.productId}` name="productId" value=`${val.productId}` required=true)
                                 label(for=`${val.productId}`) #{val.name}
                 div(class="form-section")
                     label(class="price-label" for="price") Price:
-                    input(type="number" id="price" name="price")
+                    input(type="number" id="price" name="price" required=true)
                 button Submit

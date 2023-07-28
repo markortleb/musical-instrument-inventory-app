@@ -1,7 +1,7 @@
 import InventoryItem from "../models/InventoryItem.js";
 import expressAsyncHandler from "express-async-handler";
 import express from "express";
-import Category from "../models/Category";
+import {randomUUID} from "crypto";
 
 
 // Database Functions
@@ -56,7 +56,6 @@ const getAllHandler: express.RequestHandler = expressAsyncHandler(
 const getByProductListHandler: express.RequestHandler = expressAsyncHandler(
     async (req: express.Request, res: express.Response, next: express.NextFunction): Promise<any> => {
         const productIdList = [... new Set(res.locals.products.map(item => item.productId))];
-        console.log(productIdList);
         res.locals.inventoryItems = await getByProductIdList(productIdList);
         next();
     }
@@ -69,6 +68,18 @@ const getByIdHandler: express.RequestHandler = expressAsyncHandler(
     }
 );
 
+const createInventoryItemHandler: express.RequestHandler = expressAsyncHandler(
+    async (req: express.Request, res: express.Response, next: express.NextFunction): Promise<any> => {
+        await createInventoryItem(
+            randomUUID(),
+            req.body.productId,
+            req.body.price
+        );
+        next();
+    }
+);
+
+
 
 export {
     // Database Functions
@@ -80,5 +91,6 @@ export {
     // Handlers
     getAllHandler,
     getByProductListHandler,
-    getByIdHandler
+    getByIdHandler,
+    createInventoryItemHandler
 }

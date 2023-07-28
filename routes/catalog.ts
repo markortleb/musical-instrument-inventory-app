@@ -106,14 +106,23 @@ router.get('/category/:name/createInventoryItem/',
     CategoryController.getByNameHandler,
     ProductController.getByCategoryHandler,
     function(req: express.Request, res: express.Response, next: express.NextFunction) {
-        console.log(res.locals.products);
         res.render(
             'createInventoryItem',
             {
                 title: 'Musical Instrument Inventory App',
-                products: res.locals.products
+                products: res.locals.products,
+                categoryName: req.params.name
             }
         );
+        next();
+    }
+);
+
+
+router.post('/create/inventoryItem/:name',
+    InventoryItemController.createInventoryItemHandler,
+    function(req: express.Request, res: express.Response, next: express.NextFunction) {
+        res.redirect(`/catalog/category/${req.params.name}`);
         next();
     }
 );
