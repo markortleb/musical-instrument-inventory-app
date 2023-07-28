@@ -25,6 +25,10 @@ const getByName = async (categoryName): Promise<any> => {
     return await Category.find({name: categoryName}).exec();
 }
 
+const getById = async (categoryId): Promise<any> => {
+    return await Category.find({categoryId: categoryId}).exec();
+}
+
 const deleteByName = async (categoryName): Promise<any> => {
     await Category.find({name: categoryName}).deleteMany().exec();
 };
@@ -61,6 +65,15 @@ const getByNameHandler: express.RequestHandler = expressAsyncHandler(
 );
 
 
+const getByIdHandler: express.RequestHandler = expressAsyncHandler(
+    async (req: express.Request, res: express.Response, next: express.NextFunction): Promise<any> => {
+        // There should always be only one category per name
+        res.locals.category = (await getById(res.locals.product.categoryId))[0];
+        next();
+    }
+);
+
+
 const deleteByNameHandler: express.RequestHandler = expressAsyncHandler(
     async (req: express.Request, res: express.Response, next: express.NextFunction): Promise<any> => {
         await deleteByName(req.params.name);
@@ -75,10 +88,12 @@ export {
     getAll,
     deleteByName,
     deleteAll,
+    getById,
 
     // Handlers
     createCategoryHandler,
     getAllHandler,
     getByNameHandler,
-    deleteByNameHandler
+    deleteByNameHandler,
+    getByIdHandler
 }

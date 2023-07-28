@@ -2,6 +2,8 @@ import InventoryItem from "../models/InventoryItem.js";
 import expressAsyncHandler from "express-async-handler";
 import express from "express";
 import {randomUUID} from "crypto";
+import Category from "../models/Category";
+import {deleteByName} from "./CategoryController";
 
 
 // Database Functions
@@ -23,6 +25,7 @@ const getAll = async (): Promise<any> => {
     return await InventoryItem.find().exec();
 };
 
+
 const getByProductIdList = async (productIdList): Promise<any> => {
     return await InventoryItem.find(
         {productId:
@@ -38,8 +41,14 @@ const getById = async (inventoryItemId): Promise<any> => {
     return await InventoryItem.find({inventoryItemId: inventoryItemId}).exec();
 };
 
+
 const deleteAll = async (): Promise<any> => {
     return await InventoryItem.find().deleteMany().exec();
+};
+
+
+const deleteById = async (inventoryItemId): Promise<any> => {
+    await InventoryItem.find({inventoryItemId: inventoryItemId}).deleteMany().exec();
 };
 
 
@@ -80,6 +89,13 @@ const createInventoryItemHandler: express.RequestHandler = expressAsyncHandler(
 );
 
 
+const deleteByIdHandler: express.RequestHandler = expressAsyncHandler(
+    async (req: express.Request, res: express.Response, next: express.NextFunction): Promise<any> => {
+        await deleteById(req.params.inventoryItemId);
+        next();
+    }
+);
+
 
 export {
     // Database Functions
@@ -87,10 +103,12 @@ export {
     getAll,
     getByProductIdList,
     deleteAll,
+    deleteById,
 
     // Handlers
     getAllHandler,
     getByProductListHandler,
     getByIdHandler,
-    createInventoryItemHandler
+    createInventoryItemHandler,
+    deleteByIdHandler
 }

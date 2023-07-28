@@ -47,7 +47,7 @@ router.get('/category/:name',
             {
                 title: 'Musical Instrument Inventory App',
                 name: capitalizeFirstLetter(req.params.name),
-                inventoryItems: res.locals.inventoryItems
+                inventoryItems: enrichedInventoryItems
             }
         );
         next();
@@ -58,19 +58,20 @@ router.get('/category/:name',
 router.get('/inventoryitem/:inventoryitemid',
     InventoryItemController.getByIdHandler,
     ProductController.getByIdHandler,
+    CategoryController.getByIdHandler,
     function(req: express.Request, res: express.Response, next: express.NextFunction) {
         let formattedPrice = res.locals.inventoryItem.price.toLocaleString('en-US', {
             style: 'currency',
             currency: 'USD'
         });
-
         res.render(
             'inventoryItem',
             {
                 title: 'Musical Instrument Inventory App',
                 inventoryItem: res.locals.inventoryItem,
                 formattedPrice: formattedPrice,
-                product: res.locals.product
+                product: res.locals.product,
+                category: res.locals.category
             }
         );
         next();
@@ -121,6 +122,15 @@ router.get('/category/:name/createInventoryItem/',
 
 router.post('/create/inventoryItem/:name',
     InventoryItemController.createInventoryItemHandler,
+    function(req: express.Request, res: express.Response, next: express.NextFunction) {
+        res.redirect(`/catalog/category/${req.params.name}`);
+        next();
+    }
+);
+
+
+router.get('/delete/inventoryItem/:name/:inventoryItemId',
+    InventoryItemController.deleteByIdHandler,
     function(req: express.Request, res: express.Response, next: express.NextFunction) {
         res.redirect(`/catalog/category/${req.params.name}`);
         next();
