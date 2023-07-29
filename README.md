@@ -28,4 +28,32 @@ into your Mongo DB instance.
 2. Create the collection needed for this app: `db.createCollection("musical_instruments")`.
 
 
+## Test your connection to MongoDB
+
+You can test the connection to MongoDB by running the following command:
+
+```bash
+npm run test-connection
+```
+
+## Seed your data models
+
+Before running the app, you should seed your data models. This will populate Mongo DB with some initial data.
+
+```bash
+npm run seed
+```
+
+
+## Run your server
+
+Now you can run the app:
+
+```bash
+npm run start
+```
+
+*Take a look at http://localhost:8000/*
+
+
 

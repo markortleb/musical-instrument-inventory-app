@@ -10,7 +10,7 @@
     "watch": "concurrently --kill-others \"tsc -w\" \"sass --watch --no-source-map ./public/scss:./dist/public/css \"",
     "start": "node ./dist/bin/server.js",
     "seed": "node ./dist/seedDataModels.js",
-    "testServer": "node ./dist/testServer.js"
+    "test-connection": "node ./dist/testConnection.js"
   },
   "author": "",
   "license": "ISC",
